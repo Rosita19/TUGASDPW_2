@@ -61,7 +61,7 @@ a:hover{
 .container{
     width: 100%;
     height: auto;
-    background-color: #F0F8FF;
+    background-color: white;
     
 }
 .container-input1{
@@ -248,25 +248,10 @@ a:hover{
     width: 100px;
     height: 100px;
 }
-.tableku{
-    margin: 5px auto;
-    margin-top: 50px;
-    
+.lala{
+	width: 300px;
+	height: 300px;
 }
-.vert {
-    border-left: 3px solid navy;
-    border-right: 3px solid navy;
-}
-.hori {
-    border-top: 3px solid navy;
-    border-bottom: 3px solid navy;
-}
-.kiri{
-	margin-left: 700px;
-}
-.uk{
-	width: 100px;
-	margin-top: 4px;
 
 }
 .footer{

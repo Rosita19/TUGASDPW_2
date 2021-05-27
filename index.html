@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Halaman dua</title>
+    <link rel="stylesheet" type="text/css" href="styleku.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Tic tac Toe
+                <a href="about.html" class="kiri">About</a> 
+                <a href="cara.html">Cara Bermain</a>
+            </h2>
+        </div>
+        <div class="judul">
+             <marquee><h1>Welcome To Tic Tac Toe --- Tic Tac Toe --- Tic Tac Toe</h1></marquee>       
+        </div>
+        <div>
+            <center><table class="tabelku">
+                <tr>
+                    <td class="tdku"></td>
+                    <td class="vert tdku"></td>
+                    <td class="tdku"></td>
+                </tr>
+                <tr>
+                    <td class="hori tdku"></td>
+                    <td class="vert hori tdku"></td>
+                    <td class="hori tdku"></td>
+                </tr>
+                <tr>
+                    <td class="tdku"></td>
+                    <td class="vert tdku"></td>
+                    <td class="tdku"></td>
+                </tr>
+            </table></center>
+        </div>
+        <div>
+            <center>
+                <button class="btn-1" onclick="lala()"><a href="main1.html">player vs bot</a></button>
+                <button class="btn-1" onclick=""><a href="halaman2.html"> player vs player</a></button>
+            </center>
+        </div>
+        <div class="footer mar">
+            <marquee>Tugas Kelompok Dasar Pemrograman Web --- Rosita Dewi Lutfiyah --- Muchamad Rafi Saputra --- Mukhammad Zaidan Abdulloh </marquee>
+        </div>
+    </div>
+
+    <script>
+        var $elem = $('.header');
+
+        MotionUI.animateIn($elem, 'slide-in-left', 
+        function() {
+        console.log('Transition finished!');
+        });
+        
+    </script>
+</body>
+</html>

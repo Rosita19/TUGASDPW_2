@@ -16,6 +16,8 @@ let gameActive = true;
 Kami akan menyimpan pemain kami saat ini di sini, jadi kami tahu siapa yang berbalik
 */
 let currentPlayer = "X";
+let disp_player1 = document.getElementsByName("nama1").value
+let disp_player2 = document.getElementsByName("nama2").value
 /*
 Kami akan menyimpan status permainan kami saat ini di sini, berupa string kosong dalam sebuah array
  akan memungkinkan kami melacak sel yang dimainkan dengan mudah dan memvalidasi status game nanti
@@ -23,6 +25,11 @@ Kami akan menyimpan status permainan kami saat ini di sini, berupa string kosong
 let gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 let player1 = 0
 let player2 = 0
+/*
+Kami membuat display player dari halaman2.html ke dalam main2.html
+*/
+const display_name = document.getElementsById("p1").innerHTML = disp_player1;
+const display_name2 = document.getElementsById("p2").innerHTML = disp_player2;
 /*
 Di sini kami telah menyatakan beberapa pesan yang akan kami tampilkan kepada pengguna selama permainan.
 Karena kami memiliki beberapa faktor dinamis dalam pesan tersebut, yaitu pemain saat ini,

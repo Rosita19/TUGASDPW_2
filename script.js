@@ -54,6 +54,7 @@ statusDisplay_name2.innerHTML = display_name2();
 function next() {
     disp_player1 = document.getElementsByName("nama1").value
     disp_player2 = document.getElementsByName("nama2").value
+    consol.log(disp_player1,disp_player2)
 }
 
 

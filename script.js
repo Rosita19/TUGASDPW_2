@@ -4,6 +4,8 @@ gunakan nanti
 */
 const statusDisplay = document.querySelector('.game--status');
 const statusDisplay_score = document.querySelector('.game--score');
+const statusDisplay_name = document.querySelector('.game--name');
+const statusDisplay_name = document.querySelector('.game--name2');
 /*
 Di sini kami mendeklarasikan beberapa variabel yang akan kami gunakan untuk melacak
 keadaan game melalui game.
@@ -28,8 +30,8 @@ let player2 = 0
 /*
 Kami membuat display player dari halaman2.html ke dalam main2.html
 */
-const display_name = document.getElementsById("p1").innerHTML = disp_player1;
-const display_name2 = document.getElementsById("p2").innerHTML = disp_player2;
+const display_name = () => `${disp_player1}'s`;
+const display_name2 = () => `${disp_player2}'s`;
 /*
 Di sini kami telah menyatakan beberapa pesan yang akan kami tampilkan kepada pengguna selama permainan.
 Karena kami memiliki beberapa faktor dinamis dalam pesan tersebut, yaitu pemain saat ini,
@@ -45,6 +47,9 @@ Kami mengatur pesan awal agar para pemain tahu giliran siapa
 */
 statusDisplay.innerHTML = currentPlayerTurn();
 statusDisplay_score.innerHTML = score_Message();
+statusDisplay_name.innerHTML = display_name();
+statusDisplay_name2.innerHTML = display_name2();
+
 
 function next() {
     disp_player1 = document.getElementsByName("nama1").value

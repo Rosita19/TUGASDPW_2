@@ -5,7 +5,7 @@ gunakan nanti
 const statusDisplay = document.querySelector('.game--status');
 const statusDisplay_score = document.querySelector('.game--score');
 const statusDisplay_name = document.querySelector('.game--name');
-const statusDisplay_name = document.querySelector('.game--name2');
+const statusDisplay_name2 = document.querySelector('.game--name2');
 /*
 Di sini kami mendeklarasikan beberapa variabel yang akan kami gunakan untuk melacak
 keadaan game melalui game.

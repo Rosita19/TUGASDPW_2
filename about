@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sejarah Tic Tac</title>
+	<link rel="stylesheet" type="text/css" href="styleku.css">
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+            <h2>Tic tac Toe
+                <a href="about.html" class="kiri">About</a> 
+                <a href="cara.html">Cara Bermain</a>
+            </h2>
+        </div>
+		<div>
+			<center><table>
+				<tr>
+					<td></td>
+					<td>
+						<div class="container-input2">
+							<div class="container-input1">
+								<h2>About Tic Tac Toe</h2>
+							</div>
+							<p><img src="gambar3.jpg"></p>
+							<h5>Menurut sejarah Tic Tac Toe berasal dari Kekaisaran Romawi sekitar abad pertama sebelum masehi. Masyarakat setempat menyebutnya Terni Lapili. Permainan ini sama seperti yang kita temukan di zaman sekarang yang dimainkan oleh dua orang  pemain dengan menggunakan tiga bidak, pemain harus membentuk satu barisan dengan bidak-bidak yang dimiiki di lembar kertas papirus. </h5>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td><button type="button" id="" class="btn"><a href="index.html">Back</a></button></td>
+				</tr>
+			</table>
+		</div>
+        <div class="footer mar">
+            <marquee>Tugas Kelompok Dasar Pemrograman Web --- Rosita Dewi Lutfiyah --- Muchamad Rafi Saputra --- Mukhammad Zaidan Abdulloh </marquee>
+        </div>
+    </div>
+	</div>
+</body>
+</html>

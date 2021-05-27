@@ -16,8 +16,8 @@ let gameActive = true;
 Kami akan menyimpan pemain kami saat ini di sini, jadi kami tahu siapa yang berbalik
 */
 let currentPlayer = "X";
-let disp_player1 = document.getElementsByName("nama1").value
-let disp_player2 = document.getElementsByName("nama2").value
+let disp_player1 = ""
+let disp_player2 = ""
 /*
 Kami akan menyimpan status permainan kami saat ini di sini, berupa string kosong dalam sebuah array
  akan memungkinkan kami melacak sel yang dimainkan dengan mudah dan memvalidasi status game nanti
@@ -45,6 +45,11 @@ Kami mengatur pesan awal agar para pemain tahu giliran siapa
 */
 statusDisplay.innerHTML = currentPlayerTurn();
 statusDisplay_score.innerHTML = score_Message();
+
+function next() {
+    disp_player1 = document.getElementsByName("nama1").value
+    disp_player2 = document.getElementsByName("nama2").value
+}
 
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {

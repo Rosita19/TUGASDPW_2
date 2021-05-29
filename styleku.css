@@ -195,6 +195,9 @@ a:hover{
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+.game--diff{
+	color: black;
+}
 .cell {
     font-family: "Permanent Marker", cursive;
     width: 100px;

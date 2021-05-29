@@ -125,11 +125,24 @@ function bot_Turn() {
     }else if (player1 <= 6 && player1 > 3) {
         //Medium
         difficult = "Medium"
+        hard_logic()
         if(p < 5){
             bot_choice = Math.floor((Math.random() * (p+5)) + 1);
             console.log(bot_choice)
         } else {
             bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
+            console.log(bot_choice)
+        }
+        if (q.length != 0 && saklar == true) {
+            let choice = q
+            let n = q.length
+            let val = 0
+            for (let i = 0 ; i < n ; i++){
+                val = choice[i]
+            }
+            bot_choice = val
+            saklar = false
+            console.log(saklar)
             console.log(bot_choice)
         }
 

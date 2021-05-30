@@ -157,6 +157,7 @@ a:hover{
 }
 .btn:hover{
 	background-color: #F0F8FF;
+	color : black;
 }
 .btn-1{
 	margin-top: 50px;

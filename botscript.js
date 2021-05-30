@@ -1,16 +1,10 @@
-function play(){
-    document.getElementById("hal2").style.display = "none";
-    document.getElementById("game").style.display = "block";
-}
-
 /*
 Kami menyimpan elemen status game kami di sini agar kami dapat lebih mudah
 gunakan nanti
 */
 const statusDisplay = document.querySelector('.game--status');
 const statusDisplay_score = document.querySelector('.game--score');
-const statusDisplay_name = document.querySelector('.game--name');
-const statusDisplay_name2 = document.querySelector('.game--name2');
+const statusDisplay_difficult = document.querySelector('.game--diff');
 /*
 Di sini kami mendeklarasikan beberapa variabel yang akan kami gunakan untuk melacak
 keadaan game melalui game.
@@ -30,20 +24,12 @@ Kami akan menyimpan status permainan kami saat ini di sini, berupa string kosong
 let gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 let player1 = 0
 let player2 = 0
-/*
-Kami membuat display player dari halaman2.html ke dalam main2.html
-*/
-const display_name = () => `${disp_player1}'s`;
-const display_name2 = () => `${disp_player2}'s`;
+let bot_choice = 0
+let p = 0
+let difficult = "Easy"
+let q = [] /* botchoice hard*/
+let saklar = false
 
-function klik() {
-    disp_player1 = document.getElementById("plyname").value;
-    disp_player2 = document.getElementById("plyname2").value;
-    console.log(disp_player1,disp_player2)
-}
-
-var disp_player1 = ""
-var disp_player2 = ""
 /*
 Di sini kami telah menyatakan beberapa pesan yang akan kami tampilkan kepada pengguna selama permainan.
 Karena kami memiliki beberapa faktor dinamis dalam pesan tersebut, yaitu pemain saat ini,
@@ -53,14 +39,160 @@ data terkini setiap kali kita membutuhkannya.
 const winningMessage = () => `Pemenangnya ${currentPlayer}!`;
 const drawMessage = () => `Game berakhir seri!`;
 const currentPlayerTurn = () => `Giliran ${currentPlayer}`;  // Bisa direplace dengan nama
-const score_Message = () => `${player1} : ${player2}`
+const score_Message = () => `${player1} : ${player2}`;
+
 /*
 Kami mengatur pesan awal agar para pemain tahu giliran siapa
 */
 statusDisplay.innerHTML = currentPlayerTurn();
 statusDisplay_score.innerHTML = score_Message();
-statusDisplay_name.innerHTML = display_name();
-statusDisplay_name2.innerHTML = display_name2();
+statusDisplay_difficult.innerHTML = difficult;
+
+function hard_logic(){
+    let temp = []
+    let n = q.length
+    for (let i = 1; i <= (gameState.length)-3; i += 4) { //horizontal checker
+        // const winCondition = winningConditions[i];
+        let a = gameState[i];
+        let b = gameState[i+1];
+        let c = gameState[i+2];
+        if (a === '' || b === '' || c === '' ) {
+            continue;
+        }
+
+        if (a === b && b === c) {
+            temp.push(i+3)
+        }
+    }
+    for (let i = 1; i <= (gameState.length)-12; i++){ //vertical checker
+        let a = gameState[i];
+        let b = gameState[i+4];
+        let c = gameState[i+8];
+        if (a === '' || b === '' || c === '' ) {
+            continue;
+        }
+        
+        if (a === b && b === c) {
+            temp.push(i+12)
+        }
+    }
+    for (let i = 1; i <= (gameState.length)-12; i += 4){ //diagonal checker right to left
+        let a = gameState[i];
+        let b = gameState[i+5];
+        let c = gameState[i+10];
+        if (a === '' || b === '' || c === '' ) {
+            continue;
+        }
+        
+        if (a === b && b === c) {
+            temp.push(i+15)
+        }
+    }
+    for (let i = 4; i <= (gameState.length)-12; i += 4){ //diagonal checker left to right
+        let a = gameState[i];
+        let b = gameState[i+3];
+        let c = gameState[i+6];
+        if (a === '' || b === '' || c === '' ) {
+            continue;
+        }
+        
+        if (a === b && b === c) {
+            temp.push(i+9)
+        }
+    }
+    if(temp.length >= 0){
+        if (n != temp.length) {
+            saklar = true
+            console.log(saklar)
+        }
+    }
+
+    console.log(temp)
+    q = temp /* mengganti isi dari q dengan temp*/
+}
+
+function bot_Turn() {
+    console.log(difficult)
+    if (player1 < 3) {
+        //Easy
+        bot_choice = Math.floor((Math.random() * (gameState.length)-2) + 1);
+        console.log(bot_choice)
+        //#
+        while (bot_choice <= 0){
+            bot_choice = Math.floor((Math.random() * (gameState.length)-2) + 1);
+            console.log(bot_choice)
+        }
+    }else if (player1 < 6 && player1 >= 3) {
+        //Medium
+        difficult = "Medium"
+        hard_logic()
+        if(p < 5){
+            bot_choice = Math.floor((Math.random() * (p+5)) + 1);
+            console.log(bot_choice)
+        } else {
+            bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
+            console.log(bot_choice)
+        }
+        if (q.length != 0 && saklar == true) {
+            let choice = q
+            let n = q.length
+            let val = 0
+            for (let i = 0 ; i < n ; i++){
+                val = choice[i]
+            }
+            bot_choice = val
+            saklar = false
+            console.log(saklar)
+            console.log(bot_choice)
+        }
+
+        while(bot_choice > 28 ){
+            bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
+            console.log(bot_choice)
+        }
+    }else if (player1 < 9 && player1 >= 6 ) {
+        difficult = "Hard"
+        console.log(q)
+        hard_logic()
+        if(p < 3){
+            bot_choice = Math.floor((Math.random() * (p+3)) + 1);
+            console.log(bot_choice)
+        } else {
+            bot_choice = Math.floor((Math.random() * (p+3)) + (p-3));
+            console.log(bot_choice)
+        }
+        if (q.length != 0 && saklar == true) {
+            let choice = q
+            let n = q.length
+            let val = 0
+            for (let i = 0 ; i < n ; i++){
+                val = choice[i]
+            }
+            bot_choice = val
+            saklar = false
+            console.log(saklar)
+            console.log(bot_choice)
+        }
+
+        while(bot_choice > 28 || bot_choice <= 0) {
+            bot_choice = Math.floor((Math.random() * (p+3)) + (p-3));
+            console.log(bot_choice)
+        }
+
+    }
+    
+
+    //Logika bot
+    if (gameState[bot_choice] != "X" && gameState[bot_choice] != "O"){
+        gameState[bot_choice] = "O";
+        if (bot_choice != 0) {
+            document.getElementById(`${bot_choice}`).innerHTML = "O";
+        }
+    } else { bot_Turn();}
+    statusDisplay.innerHTML = currentPlayerTurn();
+    statusDisplay_difficult.innerHTML = difficult;
+    
+}
 
 
 function handleCellPlayed(clickedCell, clickedCellIndex) {
@@ -70,20 +202,26 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
     */
         gameState[clickedCellIndex] = currentPlayer;
         clickedCell.innerHTML = currentPlayer;
+        p = parseInt(clickedCellIndex)
 }
 
 function handlePlayerChange() {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
         statusDisplay.innerHTML = currentPlayerTurn();
         statusDisplay_score.innerHTML = score_Message();
-        statusDisplay_name.innerHTML = display_name();
-        statusDisplay_name2.innerHTML = display_name2();
-        console.log(disp_player1,disp_player2)
+        statusDisplay_difficult.innerHTML = difficult;
+        if (currentPlayer === "O"){
+            currentPlayer = "O"
+            statusDisplay.innerHTML = currentPlayerTurn();
+            bot_Turn();
+            handleResultValidation()
+        }
+
 }
 
 function handleResultValidation() {
     let roundWon = false;
-    for (let i = 1; i <= (gameState.length)-2; i += 4) { //horizontal checker
+    for (let i = 1; i <= (gameState.length)-3; i += 4) { //horizontal checker
         // const winCondition = winningConditions[i];
         let a = gameState[i];
         let b = gameState[i+1];
@@ -94,6 +232,7 @@ function handleResultValidation() {
             continue;
         }
         if (a === b && b === c && c === d) {
+            console.log(i,i+1,i+2,i+3)
             roundWon = true;
             break
         }
@@ -108,6 +247,7 @@ function handleResultValidation() {
             continue;
         }
         if (a === b && b === c && c === d) {
+            console.log(i,i+4,i+8,i+12)
             roundWon = true;
             break
         }
@@ -117,11 +257,12 @@ function handleResultValidation() {
         let a = gameState[i];
         let b = gameState[i+5];
         let c = gameState[i+10];
-        let d = gameState[i+15]
+        let d = gameState[i+15];
         if (a === '' || b === '' || c === '' || d === '') {
             continue;
         }
         if (a === b && b === c && c === d) {
+            console.log(i,i+5,i+10,i+15)
             roundWon = true;
             break
         }
@@ -135,11 +276,14 @@ function handleResultValidation() {
         if (a === '' || b === '' || c === '' || d === '') {
             continue;
         }
+
         if (a === b && b === c && c === d) {
+            console.log(i,i+3,i+6,i+9)
             roundWon = true;
             break
         }
     }
+
 
     if (roundWon) {
         statusDisplay.innerHTML = winningMessage();

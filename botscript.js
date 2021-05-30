@@ -113,7 +113,7 @@ function hard_logic(){
 
 function bot_Turn() {
     console.log(difficult)
-    if (player1 <= 3) {
+    if (player1 < 3) {
         //Easy
         bot_choice = Math.floor((Math.random() * (gameState.length)-2) + 1);
         console.log(bot_choice)
@@ -122,7 +122,7 @@ function bot_Turn() {
             bot_choice = Math.floor((Math.random() * (gameState.length)-2) + 1);
             console.log(bot_choice)
         }
-    }else if (player1 <= 6 && player1 > 3) {
+    }else if (player1 < 6 && player1 >= 3) {
         //Medium
         difficult = "Medium"
         hard_logic()
@@ -150,7 +150,7 @@ function bot_Turn() {
             bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
             console.log(bot_choice)
         }
-    }else if (player1 <= 9 && player1 > 6 ) {
+    }else if (player1 < 9 && player1 >= 6 ) {
         difficult = "Hard"
         console.log(q)
         hard_logic()

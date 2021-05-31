@@ -347,7 +347,7 @@ function bot_Turn() {
             console.log(bot_choice)
         }
 
-    }else if (player1 < 9 && player1 >= 6 ) {
+    }else if (player1 <= 100 && player1 >= 6 ) {
         difficult = "Hard"
         console.log(q)
         hard_logic()
@@ -416,6 +416,9 @@ function handlePlayerChange() {
             statusDisplay.innerHTML = currentPlayerTurn();
             bot_Turn();
             handleResultValidation()
+        } if (player1 == 100) {
+            player1 = 0;
+            player2 = 0;
         }
 
 }

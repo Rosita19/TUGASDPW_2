@@ -1,8 +1,8 @@
 function play(){
     document.getElementById("hal2").style.display = "none";
     document.getElementById("game").style.display = "block";
-    document.getElementsByClassName("game--name").innerHTML = disp_player1;
-    document.getElementsByClassName("game--name2").innerHTML = disp_player2;
+    document.getElementById("namep1").innerHTML = disp_player1;
+    document.getElementById("namep2").innerHTML = disp_player2;
 }
 
 /*

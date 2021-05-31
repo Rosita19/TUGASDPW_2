@@ -22,7 +22,7 @@ Kami akan menyimpan status permainan kami saat ini di sini, berupa string kosong
  akan memungkinkan kami melacak sel yang dimainkan dengan mudah dan memvalidasi status game nanti
 */
 let gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-let player1 = 3
+let player1 = 0
 let player2 = 0
 let bot_choice = 0
 let p = 0

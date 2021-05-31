@@ -22,13 +22,14 @@ Kami akan menyimpan status permainan kami saat ini di sini, berupa string kosong
  akan memungkinkan kami melacak sel yang dimainkan dengan mudah dan memvalidasi status game nanti
 */
 let gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-let player1 = 0
+let player1 = 3
 let player2 = 0
 let bot_choice = 0
 let p = 0
 let difficult = "Easy"
 let q = [] /* botchoice hard*/
 let saklar = false
+let z = [] /*pembanding choice*/
 
 /*
 Di sini kami telah menyatakan beberapa pesan yang akan kami tampilkan kepada pengguna selama permainan.
@@ -48,6 +49,110 @@ statusDisplay.innerHTML = currentPlayerTurn();
 statusDisplay_score.innerHTML = score_Message();
 statusDisplay_difficult.innerHTML = difficult;
 
+function medium_logic(){
+    let temp = []
+    let n = q.length
+    for (let i = 1; i <= (gameState.length)-3; i += 4) { //horizontal checker
+        // const winCondition = winningConditions[i];
+        let a = gameState[i];
+        let b = gameState[i+1];
+        let c = gameState[i+2];
+        let d = gameState[i+3];
+        
+        if (a === b && b === c && (a,b,c != '')) {
+            temp.push(i+3)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+2)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+1)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+    }
+
+    for (let i = 1; i <= (gameState.length)-12; i++){ //vertical checker
+        let a = gameState[i];
+        let b = gameState[i+4];
+        let c = gameState[i+8];
+        let d = gameState[i+12];
+        if (a === b && b === c && (a,b,c != '')) {
+            temp.push(i+12)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+8)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+4)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+    }
+
+    for (let i = 1; i <= (gameState.length)-12; i += 4){ //diagonal checker right to left
+        let a = gameState[i];
+        let b = gameState[i+5];
+        let c = gameState[i+10];
+        let d = gameState[i+15];
+        if (a === b && b === c && (a,b,c != '')) {
+            temp.push(i+15)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+10)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+5)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+    }
+
+    for (let i = 4; i <= (gameState.length)-12; i += 4){ //diagonal checker left to right
+        let a = gameState[i];
+        let b = gameState[i+3];
+        let c = gameState[i+6];
+        let d = gameState[i+9];
+        if (a === b && b === c && (a,b,c != '')) {
+            temp.push(i+9)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+6)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+3)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+    }
+
+    if(temp.length >= 0){
+        if (n != temp.length) {
+            saklar = true
+            console.log(saklar)
+        }
+    }
+
+    console.log(temp)
+    q = temp /* mengganti isi dari q dengan temp*/
+}
+
 function hard_logic(){
     let temp = []
     let n = q.length
@@ -56,48 +161,122 @@ function hard_logic(){
         let a = gameState[i];
         let b = gameState[i+1];
         let c = gameState[i+2];
-        if (a === '' || b === '' || c === '' ) {
-            continue;
-        }
-
-        if (a === b && b === c) {
+        let d = gameState[i+3];
+        
+        if (a === b && b === c && (a,b,c != '')) {
             temp.push(i+3)
         }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+2)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+1)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b != 'O')){
+            temp.push(i+2)
+        }
+
+        if (b===c && (b,c != '') && (b,c != 'O')){
+            temp.push(i)
+        }
+
     }
     for (let i = 1; i <= (gameState.length)-12; i++){ //vertical checker
         let a = gameState[i];
         let b = gameState[i+4];
         let c = gameState[i+8];
-        if (a === '' || b === '' || c === '' ) {
-            continue;
-        }
+        let d = gameState[i+12];
         
-        if (a === b && b === c) {
+        if (a === b && b === c && (a,b,c != '')) {
             temp.push(i+12)
         }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+8)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+4)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b != 'O')){
+            temp.push(i+8)
+        }
+
+        if (b===c && (b,c != '') && (b,c != 'O')){
+            temp.push(i)
+        }
+
     }
     for (let i = 1; i <= (gameState.length)-12; i += 4){ //diagonal checker right to left
         let a = gameState[i];
         let b = gameState[i+5];
         let c = gameState[i+10];
-        if (a === '' || b === '' || c === '' ) {
-            continue;
-        }
-        
-        if (a === b && b === c) {
+        let d = gameState[i+15];
+
+        if (a === b && b === c && (a,b,c != '')) {
             temp.push(i+15)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+10)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+5)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b != 'O')){
+            temp.push(i+10)
+        }
+
+        if (b===c && (b,c != '') && (b,c != 'O')){
+            temp.push(i)
         }
     }
     for (let i = 4; i <= (gameState.length)-12; i += 4){ //diagonal checker left to right
         let a = gameState[i];
         let b = gameState[i+3];
         let c = gameState[i+6];
-        if (a === '' || b === '' || c === '' ) {
-            continue;
-        }
-        
-        if (a === b && b === c) {
+        let d = gameState[i+9];
+
+        if (a === b && b === c && (a,b,c != '')) {
             temp.push(i+9)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+6)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+3)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b != 'O')){
+            temp.push(i+6)
+        }
+
+        if (b===c && (b,c != '') && (b,c != 'O')){
+            temp.push(i)
         }
     }
     if(temp.length >= 0){
@@ -125,20 +304,42 @@ function bot_Turn() {
     }else if (player1 < 6 && player1 >= 3) {
         //Medium
         difficult = "Medium"
-        hard_logic()
+        medium_logic()
+        console.log(q)
+        console.log(z)
         if(p < 5){
             bot_choice = Math.floor((Math.random() * (p+5)) + 1);
             console.log(bot_choice)
-        } else {
+        } else if (p <= 28 && p > 5){
             bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
+            if (bot_choice > 28){
+                for (let i = 1 ; i <= 28 ;i++){
+                    if (gameState[i] == ''){
+                        bot_choice == i;
+                        break
+                    }
+                }
+            } else {
+                bot_choice = bot_choice
+            }
             console.log(bot_choice)
+        } else {
+            for (let i = 1 ; i <= 28 ;i++){
+                if (gameState[i] == ''){
+                    bot_choice == i;
+                    break
+                }
+            }
         }
         if (q.length != 0 && saklar == true) {
             let choice = q
             let n = q.length
             let val = 0
             for (let i = 0 ; i < n ; i++){
-                val = choice[i]
+                if (!(z.includes(choice[i]))){
+                    val = choice[i];
+                    z = q;
+                }
             }
             bot_choice = val
             saklar = false
@@ -146,10 +347,6 @@ function bot_Turn() {
             console.log(bot_choice)
         }
 
-        while(bot_choice > 28 ){
-            bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
-            console.log(bot_choice)
-        }
     }else if (player1 < 9 && player1 >= 6 ) {
         difficult = "Hard"
         console.log(q)
@@ -157,28 +354,32 @@ function bot_Turn() {
         if(p < 3){
             bot_choice = Math.floor((Math.random() * (p+3)) + 1);
             console.log(bot_choice)
-        } else {
+        } else if (p <= 28 && p > 3) {
             bot_choice = Math.floor((Math.random() * (p+3)) + (p-3));
             console.log(bot_choice)
+        } else {
+            for (let i = 1 ; i <= 28 ;i++){
+                if (gameState[i] == ''){
+                    bot_choice == i;
+                    break
+                }
+            }
         }
         if (q.length != 0 && saklar == true) {
             let choice = q
             let n = q.length
             let val = 0
             for (let i = 0 ; i < n ; i++){
-                val = choice[i]
+                if (!(z.includes(choice[i]))){
+                    val = choice[i];
+                    z = q;
+                }
             }
             bot_choice = val
             saklar = false
             console.log(saklar)
             console.log(bot_choice)
         }
-
-        while(bot_choice > 28 || bot_choice <= 0) {
-            bot_choice = Math.floor((Math.random() * (p+3)) + (p-3));
-            console.log(bot_choice)
-        }
-
     }
     
 
@@ -346,6 +547,8 @@ function handleRestartGame() {
     gameActive = true;
     currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];;
+    q = []
+    z = []
     statusDisplay.innerHTML = currentPlayerTurn();
     statusDisplay_score.innerHTML = score_Message();
     document.querySelectorAll('.cell')

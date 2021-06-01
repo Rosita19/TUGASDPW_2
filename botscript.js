@@ -22,7 +22,7 @@ Kami akan menyimpan status permainan kami saat ini di sini, berupa string kosong
  akan memungkinkan kami melacak sel yang dimainkan dengan mudah dan memvalidasi status game nanti
 */
 let gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
-let player1 = 0
+let player1 = 3
 let player2 = 0
 let bot_choice = 0
 let p = 0
@@ -432,14 +432,11 @@ function bot_Turn() {
         
     }
     
-    while(bot_choice > 28){
-     for (let g = 1 ; g <= 28 ; g++){
-      if(gameState[i] == ''){
-       bot_choice = i;
-       console.log(bot_choice);
-       break
-      }
-     }
+    while(bot_choice > 28 && bot_choice != 0){
+        bot_choice = Math.floor((Math.random() * (gameState.length)-2) + 1);
+    }
+    while(bot_choice <= 0){
+        bot_choice = Math.floor((Math.random() * (gameState.length)-2) + 1);
     }
     
     console.log(bot_choice)

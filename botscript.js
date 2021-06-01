@@ -21,7 +21,7 @@ let currentPlayer = "X";
 Kami akan menyimpan status permainan kami saat ini di sini, berupa string kosong dalam sebuah array
  akan memungkinkan kami melacak sel yang dimainkan dengan mudah dan memvalidasi status game nanti
 */
-let gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+let gameState = ["None", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 let player1 = 0
 let player2 = 0
 let bot_choice = 0
@@ -37,8 +37,8 @@ Karena kami memiliki beberapa faktor dinamis dalam pesan tersebut, yaitu pemain 
 kami telah mendeklarasikannya sebagai fungsi, sehingga pesan aktual dibuat dengan
 data terkini setiap kali kita membutuhkannya.
 */
-let winningMessage = () =>`Pemenangnya ${currentPlayer}!`;
-let drawMessage = `Game berakhir seri!`;
+let winningMessage = () => `Pemenangnya ${currentPlayer}!`;
+let drawMessage = () => `Game berakhir seri!`;
 let currentPlayerTurn = `Giliran ${currentPlayer}`;  
 
 
@@ -380,7 +380,7 @@ function bot_Turn() {
         if(p < 5){
             bot_choice = Math.floor((Math.random() * (p+5)) + 1);
             console.log(bot_choice)
-        } else if (p <= 28 && p > 5){
+        } else if (p <= 28 && p >= 5){
             bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
             console.log(bot_choice)
         }
@@ -565,7 +565,7 @@ yang masih belum diisi dengan tanda pemain
 */
     let roundDraw = !gameState.includes("");
     if (roundDraw) {
-        statusDisplay.innerHTML = drawMessage;
+        statusDisplay.innerHTML = drawMessage();
         statusDisplay_score.innerHTML = player1 + " : " + player2;;
         gameActive = false;
         return;
@@ -607,7 +607,7 @@ function handleCellClick(clickedCellEvent) {
 function handleRestartGame() {
     gameActive = true;
     currentPlayer = "X";
-    gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];;
+    gameState = ["None", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];;
     q = []
     z = []
     statusDisplay.innerHTML = currentPlayerTurn;

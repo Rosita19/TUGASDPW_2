@@ -357,6 +357,16 @@ function bot_Turn() {
         } else if (p <= 28 && p > 3) {
             bot_choice = Math.floor((Math.random() * (p+3)) + (p-3));
             console.log(bot_choice)
+            if (bot_choice > 28) {
+             for (let i = 1 ; i <= 28 ;i++){
+                    if (gameState[i] == ''){
+                        bot_choice == i;
+                        break
+                    }
+               }
+            } else {
+                  bot_choice = bot_choice
+            }
         } else {
             for (let i = 1 ; i <= 28 ;i++){
                 if (gameState[i] == ''){

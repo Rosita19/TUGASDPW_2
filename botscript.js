@@ -455,16 +455,25 @@ function bot_Turn() {
                     z = q;
                 }
             }
+         
             bot_choice = val
             saklar = false
             console.log(saklar)
             console.log(bot_choice)
         }
+        if (bot_choice > 28) {
+         for (let i = 1 ; i <= 28 ;i++){
+                    if (gameState[i] == ''){
+                        bot_choice == i;
+                        break
+                    }
+               }
+        }
     }
     
 
     //Logika bot
-    if (gameState[bot_choice] != "X" && gameState[bot_choice] != "O"){
+    if (gameState[bot_choice] != "X" && gameState[bot_choice] != "O" ){
         gameState[bot_choice] = "O";
         if (bot_choice != 0) {
             document.getElementById(`${bot_choice}`).innerHTML = "O";

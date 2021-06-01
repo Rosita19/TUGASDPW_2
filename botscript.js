@@ -37,7 +37,7 @@ Karena kami memiliki beberapa faktor dinamis dalam pesan tersebut, yaitu pemain 
 kami telah mendeklarasikannya sebagai fungsi, sehingga pesan aktual dibuat dengan
 data terkini setiap kali kita membutuhkannya.
 */
-let winningMessage = `Pemenangnya ${currentPlayer}!`;
+let winningMessage = () =>`Pemenangnya ${currentPlayer}!`;
 let drawMessage = `Game berakhir seri!`;
 let currentPlayerTurn = `Giliran ${currentPlayer}`;  
 
@@ -548,7 +548,7 @@ function handleResultValidation() {
 
 
     if (roundWon) {
-        statusDisplay.innerHTML = winningMessage;
+        statusDisplay.innerHTML = winningMessage();
         statusDisplay_score.innerHTML = player1 + " : " + player2;;
         if (currentPlayer === "X" && roundWon === true){
             player1 += 1

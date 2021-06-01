@@ -40,13 +40,13 @@ data terkini setiap kali kita membutuhkannya.
 let winningMessage = `Pemenangnya ${currentPlayer}!`;
 let drawMessage = `Game berakhir seri!`;
 let currentPlayerTurn = `Giliran ${currentPlayer}`;  
-let score_Message = `${player1} : ${player2}`;
+
 
 /*
 Kami mengatur pesan awal agar para pemain tahu giliran siapa
 */
 statusDisplay.innerHTML = currentPlayerTurn;
-statusDisplay_score.innerHTML = score_Message;
+statusDisplay_score.innerHTML = player1 + " : " + player2;
 statusDisplay_difficult.innerHTML = difficult;
 
 function medium_logic(){
@@ -419,7 +419,7 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
 function handlePlayerChange() {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
         statusDisplay.innerHTML = currentPlayerTurn;
-        statusDisplay_score.innerHTML = score_Message;
+        statusDisplay_score.innerHTML = player1 + " : " + player2;
         statusDisplay_difficult.innerHTML = difficult;
         if (currentPlayer === "O"){
             currentPlayer = "O"
@@ -501,7 +501,7 @@ function handleResultValidation() {
 
     if (roundWon) {
         statusDisplay.innerHTML = winningMessage;
-        statusDisplay_score.innerHTML = score_Message;
+        statusDisplay_score.innerHTML = player1 + " : " + player2;;
         if (currentPlayer === "X" && roundWon === true){
             player1 += 1
         } else if (currentPlayer === "O" && roundWon === true) {
@@ -518,7 +518,7 @@ yang masih belum diisi dengan tanda pemain
     let roundDraw = !gameState.includes("");
     if (roundDraw) {
         statusDisplay.innerHTML = drawMessage;
-        statusDisplay_score.innerHTML = score_Message;
+        statusDisplay_score.innerHTML = player1 + " : " + player2;;
         gameActive = false;
         return;
     }
@@ -563,7 +563,7 @@ function handleRestartGame() {
     q = []
     z = []
     statusDisplay.innerHTML = currentPlayerTurn;
-    statusDisplay_score.innerHTML = score_Message;
+    statusDisplay_score.innerHTML = player1 + " : " + player2;;
     document.querySelectorAll('.cell')
                .forEach(cell => cell.innerHTML = "");
 }

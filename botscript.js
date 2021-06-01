@@ -37,16 +37,16 @@ Karena kami memiliki beberapa faktor dinamis dalam pesan tersebut, yaitu pemain 
 kami telah mendeklarasikannya sebagai fungsi, sehingga pesan aktual dibuat dengan
 data terkini setiap kali kita membutuhkannya.
 */
-const winningMessage = () => `Pemenangnya ${currentPlayer}!`;
-const drawMessage = () => `Game berakhir seri!`;
-const currentPlayerTurn = () => `Giliran ${currentPlayer}`;  // Bisa direplace dengan nama
-const score_Message = () => `${player1} : ${player2}`;
+let winningMessage = `Pemenangnya ${currentPlayer}!`;
+let drawMessage = `Game berakhir seri!`;
+let currentPlayerTurn = `Giliran ${currentPlayer}`;  
+let score_Message = `${player1} : ${player2}`;
 
 /*
 Kami mengatur pesan awal agar para pemain tahu giliran siapa
 */
-statusDisplay.innerHTML = currentPlayerTurn();
-statusDisplay_score.innerHTML = score_Message();
+statusDisplay.innerHTML = currentPlayerTurn;
+statusDisplay_score.innerHTML = score_Message;
 statusDisplay_difficult.innerHTML = difficult;
 
 function medium_logic(){
@@ -400,7 +400,7 @@ function bot_Turn() {
             document.getElementById(`${bot_choice}`).innerHTML = "O";
         }
     } else { bot_Turn();}
-    statusDisplay.innerHTML = currentPlayerTurn();
+    statusDisplay.innerHTML = currentPlayerTurn;
     statusDisplay_difficult.innerHTML = difficult;
     
 }
@@ -418,12 +418,12 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
 
 function handlePlayerChange() {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
-        statusDisplay.innerHTML = currentPlayerTurn();
-        statusDisplay_score.innerHTML = score_Message();
+        statusDisplay.innerHTML = currentPlayerTurn;
+        statusDisplay_score.innerHTML = score_Message;
         statusDisplay_difficult.innerHTML = difficult;
         if (currentPlayer === "O"){
             currentPlayer = "O"
-            statusDisplay.innerHTML = currentPlayerTurn();
+            statusDisplay.innerHTML = currentPlayerTurn;
             bot_Turn();
             handleResultValidation()
         } if (player1 == 100) {
@@ -562,8 +562,8 @@ function handleRestartGame() {
     gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];;
     q = []
     z = []
-    statusDisplay.innerHTML = currentPlayerTurn();
-    statusDisplay_score.innerHTML = score_Message();
+    statusDisplay.innerHTML = currentPlayerTurn;
+    statusDisplay_score.innerHTML = score_Message;
     document.querySelectorAll('.cell')
                .forEach(cell => cell.innerHTML = "");
 }

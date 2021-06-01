@@ -500,8 +500,8 @@ function handleResultValidation() {
 
 
     if (roundWon) {
-        statusDisplay.innerHTML = winningMessage();
-        statusDisplay_score.innerHTML = score_Message();
+        statusDisplay.innerHTML = winningMessage;
+        statusDisplay_score.innerHTML = score_Message;
         if (currentPlayer === "X" && roundWon === true){
             player1 += 1
         } else if (currentPlayer === "O" && roundWon === true) {
@@ -517,8 +517,8 @@ yang masih belum diisi dengan tanda pemain
 */
     let roundDraw = !gameState.includes("");
     if (roundDraw) {
-        statusDisplay.innerHTML = drawMessage();
-        statusDisplay_score.innerHTML = score_Message();
+        statusDisplay.innerHTML = drawMessage;
+        statusDisplay_score.innerHTML = score_Message;
         gameActive = false;
         return;
     }

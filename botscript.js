@@ -39,13 +39,13 @@ data terkini setiap kali kita membutuhkannya.
 */
 let winningMessage = () => `Pemenangnya ${currentPlayer}!`;
 let drawMessage = () => `Game berakhir seri!`;
-let currentPlayerTurn = `Giliran ${currentPlayer}`;  
+const currentPlayerTurn = () => `Giliran ${currentPlayer}`;  
 
 
 /*
 Kami mengatur pesan awal agar para pemain tahu giliran siapa
 */
-statusDisplay.innerHTML = currentPlayerTurn;
+statusDisplay.innerHTML = currentPlayerTurn();
 statusDisplay_score.innerHTML = player1 + " : " + player2;
 statusDisplay_difficult.innerHTML = difficult;
 
@@ -448,7 +448,7 @@ function bot_Turn() {
             document.getElementById(`${bot_choice}`).innerHTML = "O";
         }
     } else { bot_Turn();}
-    statusDisplay.innerHTML = currentPlayerTurn;
+    statusDisplay.innerHTML = currentPlayerTurn();
     statusDisplay_difficult.innerHTML = difficult;
     
 }
@@ -466,13 +466,14 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
 
 function handlePlayerChange() {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
-        statusDisplay.innerHTML = currentPlayerTurn;
+        statusDisplay.innerHTML = currentPlayerTurn();
+        console.log(currentPlayerTurn())
         statusDisplay_score.innerHTML = player1 + " : " + player2;
         statusDisplay_difficult.innerHTML = difficult;
         if (currentPlayer === "O"){
             currentPlayer = "O"
-            statusDisplay.innerHTML = currentPlayerTurn;
-            bot_Turn();
+            statusDisplay.innerHTML = currentPlayerTurn();
+            bot_Turn()
             handleResultValidation()
         } if (player1 == 100) {
             player1 = 0;
@@ -574,7 +575,7 @@ yang masih belum diisi dengan tanda pemain
 Jika kita sampai di sini kita tahu bahwa belum ada yang memenangkan permainan,
 dan masih ada gerakan yang harus dimainkan, jadi kami melanjutkan dengan mengubah pemain saat ini.
 */
-    handlePlayerChange();
+    setTimeout(handlePlayerChange,1000);
 }
 
 function handleCellClick(clickedCellEvent) {
@@ -610,7 +611,7 @@ function handleRestartGame() {
     gameState = ["None", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];;
     q = []
     z = []
-    statusDisplay.innerHTML = currentPlayerTurn;
+    statusDisplay.innerHTML = currentPlayerTurn();
     statusDisplay_score.innerHTML = player1 + " : " + player2;;
     document.querySelectorAll('.cell')
                .forEach(cell => cell.innerHTML = "");

@@ -186,6 +186,26 @@ function hard_logic(){
         if (b===c && (b,c != '') && (b,c != 'O')){
             temp.push(i)
         }
+        
+        if (a === b && b === c && (a,b,c == 'O')) {
+            temp.push(i+3)
+        }
+
+        if (a === b && b === d && (a,b,d == 'O')) {
+            temp.push(i+2)
+        }
+
+        if (a === c && c === d && (a,c,d == 'O')) {
+            temp.push(i+1)
+        }
+
+        if (b === c && c === d && (b,c,d == 'O')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b == 'O')){
+            temp.push(i+2)
+        }
 
     }
     for (let i = 1; i <= (gameState.length)-12; i++){ //vertical checker
@@ -217,6 +237,23 @@ function hard_logic(){
         if (b===c && (b,c != '') && (b,c != 'O')){
             temp.push(i)
         }
+        
+        if (a === b && b === c && (a,b,c == 'O')) {
+            temp.push(i+12)
+        }
+
+        if (a === b && b === d && (a,b,d == 'O')) {
+            temp.push(i+8)
+        }
+
+        if (a === c && c === d && (a,c,d == 'O')) {
+            temp.push(i+4)
+        }
+
+        if (b === c && c === d && (b,c,d == 'O')) {
+            temp.push(i)
+        }
+
 
     }
     for (let i = 1; i <= (gameState.length)-12; i += 4){ //diagonal checker right to left
@@ -248,6 +285,23 @@ function hard_logic(){
         if (b===c && (b,c != '') && (b,c != 'O')){
             temp.push(i)
         }
+     
+        if (a === b && b === c && (a,b,c == 'O')) {
+            temp.push(i+15)
+        }
+
+        if (a === b && b === d && (a,b,d == 'O')) {
+            temp.push(i+10)
+        }
+
+        if (a === c && c === d && (a,c,d == 'O')) {
+            temp.push(i+5)
+        }
+
+        if (b === c && c === d && (b,c,d == 'O')) {
+            temp.push(i)
+        }
+
     }
     for (let i = 4; i <= (gameState.length)-12; i += 4){ //diagonal checker left to right
         let a = gameState[i];
@@ -276,6 +330,22 @@ function hard_logic(){
         }
 
         if (b===c && (b,c != '') && (b,c != 'O')){
+            temp.push(i)
+        }
+        
+        if (a === b && b === c && (a,b,c == 'O')) {
+            temp.push(i+9)
+        }
+
+        if (a === b && b === d && (a,b,d == 'O')) {
+            temp.push(i+6)
+        }
+
+        if (a === c && c === d && (a,c,d == 'O')) {
+            temp.push(i+3)
+        }
+
+        if (b === c && c === d && (b,c,d == 'O')) {
             temp.push(i)
         }
     }

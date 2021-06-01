@@ -382,25 +382,9 @@ function bot_Turn() {
             console.log(bot_choice)
         } else if (p <= 28 && p > 5){
             bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
-            if (bot_choice > 28){
-                for (let i = 1 ; i <= 28 ;i++){
-                    if (gameState[i] == ''){
-                        bot_choice == i;
-                        break
-                    }
-                }
-            } else {
-                bot_choice = bot_choice
-            }
             console.log(bot_choice)
-        } else {
-            for (let i = 1 ; i <= 28 ;i++){
-                if (gameState[i] == ''){
-                    bot_choice == i;
-                    break
-                }
-            }
         }
+     
         if (q.length != 0 && saklar == true) {
             let choice = q
             let n = q.length
@@ -426,26 +410,9 @@ function bot_Turn() {
             console.log(bot_choice)
         } else if (p <= 28 && p > 3) {
             bot_choice = Math.floor((Math.random() * (p+3)) + (p-3));
-            let chche = bot_choice
             console.log(bot_choice)
-            if (chche > 28) {
-             for (let i = 1 ; i <= 28 ;i++){
-                    if (gameState[i] == ''){
-                        bot_choice == i;
-                        console.log(bot_choice)
-                        break
-                    }
-               }
-            }
-           console.log(bot_choice)
-        } else {
-            for (let i = 1 ; i <= 28 ;i++){
-                if (gameState[i] == ''){
-                    bot_choice == i;
-                    break
-                }
-            }
         }
+     
         if (q.length != 0 && saklar == true) {
             let choice = q
             let n = q.length
@@ -465,7 +432,18 @@ function bot_Turn() {
         
     }
     
-
+    while(bot_choice > 28){
+     for (let g = 1 ; g <= 28 ; g++){
+      if(gameState[i] == ''){
+       bot_choice = i;
+       console.log(bot_choice);
+       break
+      }
+     }
+    }
+    
+    console.log(bot_choice)
+ 
     //Logika bot
     if (gameState[bot_choice] != "X" && gameState[bot_choice] != "O" ){
         gameState[bot_choice] = "O";

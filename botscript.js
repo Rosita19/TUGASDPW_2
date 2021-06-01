@@ -432,6 +432,7 @@ function bot_Turn() {
              for (let i = 1 ; i <= 28 ;i++){
                     if (gameState[i] == ''){
                         bot_choice == i;
+                        console.log(bot_choice)
                         break
                     }
                }
@@ -468,7 +469,7 @@ function bot_Turn() {
     //Logika bot
     if (gameState[bot_choice] != "X" && gameState[bot_choice] != "O" ){
         gameState[bot_choice] = "O";
-        if (bot_choice != 0) {
+        if (bot_choice != 0 && bot_choice <= 28) {
             document.getElementById(`${bot_choice}`).innerHTML = "O";
         }
     } else { bot_Turn();}

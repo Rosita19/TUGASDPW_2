@@ -21,7 +21,7 @@ let currentPlayer = "X";
 Kami akan menyimpan status permainan kami saat ini di sini, berupa string kosong dalam sebuah array
  akan memungkinkan kami melacak sel yang dimainkan dengan mudah dan memvalidasi status game nanti
 */
-let gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
+let gameState = ["None", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];
 let player1 = 0
 let player2 = 0
 let bot_choice = 0
@@ -29,6 +29,7 @@ let p = 0
 let difficult = "Easy"
 let q = [] /* botchoice hard*/
 let saklar = false
+let z = [] /*pembanding choice*/
 
 /*
 Di sini kami telah menyatakan beberapa pesan yang akan kami tampilkan kepada pengguna selama permainan.
@@ -36,17 +37,121 @@ Karena kami memiliki beberapa faktor dinamis dalam pesan tersebut, yaitu pemain 
 kami telah mendeklarasikannya sebagai fungsi, sehingga pesan aktual dibuat dengan
 data terkini setiap kali kita membutuhkannya.
 */
-const winningMessage = () => `Pemenangnya ${currentPlayer}!`;
-const drawMessage = () => `Game berakhir seri!`;
-const currentPlayerTurn = () => `Giliran ${currentPlayer}`;  // Bisa direplace dengan nama
-const score_Message = () => `${player1} : ${player2}`;
+let winningMessage = () => `Pemenangnya ${currentPlayer}!`;
+let drawMessage = () => `Game berakhir seri!`;
+const currentPlayerTurn = () => `Giliran ${currentPlayer}`;  
+
 
 /*
 Kami mengatur pesan awal agar para pemain tahu giliran siapa
 */
 statusDisplay.innerHTML = currentPlayerTurn();
-statusDisplay_score.innerHTML = score_Message();
+statusDisplay_score.innerHTML = player1 + " : " + player2;
 statusDisplay_difficult.innerHTML = difficult;
+
+function medium_logic(){
+    let temp = []
+    let n = q.length
+    for (let i = 1; i <= (gameState.length)-3; i += 4) { //horizontal checker
+        // const winCondition = winningConditions[i];
+        let a = gameState[i];
+        let b = gameState[i+1];
+        let c = gameState[i+2];
+        let d = gameState[i+3];
+        
+        if (a === b && b === c && (a,b,c != '')) {
+            temp.push(i+3)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+2)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+1)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+    }
+
+    for (let i = 1; i <= (gameState.length)-12; i++){ //vertical checker
+        let a = gameState[i];
+        let b = gameState[i+4];
+        let c = gameState[i+8];
+        let d = gameState[i+12];
+        if (a === b && b === c && (a,b,c != '')) {
+            temp.push(i+12)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+8)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+4)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+    }
+
+    for (let i = 1; i <= (gameState.length)-12; i += 4){ //diagonal checker right to left
+        let a = gameState[i];
+        let b = gameState[i+5];
+        let c = gameState[i+10];
+        let d = gameState[i+15];
+        if (a === b && b === c && (a,b,c != '')) {
+            temp.push(i+15)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+10)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+5)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+    }
+
+    for (let i = 4; i <= (gameState.length)-12; i += 4){ //diagonal checker left to right
+        let a = gameState[i];
+        let b = gameState[i+3];
+        let c = gameState[i+6];
+        let d = gameState[i+9];
+        if (a === b && b === c && (a,b,c != '')) {
+            temp.push(i+9)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+6)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+3)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+    }
+
+    if(temp.length >= 0){
+        if (n != temp.length) {
+            saklar = true
+            console.log(saklar)
+        }
+    }
+
+    console.log(temp)
+    q = temp /* mengganti isi dari q dengan temp*/
+}
 
 function hard_logic(){
     let temp = []
@@ -56,48 +161,192 @@ function hard_logic(){
         let a = gameState[i];
         let b = gameState[i+1];
         let c = gameState[i+2];
-        if (a === '' || b === '' || c === '' ) {
-            continue;
-        }
-
-        if (a === b && b === c) {
+        let d = gameState[i+3];
+        
+        if (a === b && b === c && (a,b,c != '')) {
             temp.push(i+3)
         }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+2)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+1)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b != 'O')){
+            temp.push(i+2)
+        }
+
+        if (b===c && (b,c != '') && (b,c != 'O')){
+            temp.push(i)
+        }
+        
+        if (a === b && b === c && (a,b,c == 'O')) {
+            temp.push(i+3)
+        }
+
+        if (a === b && b === d && (a,b,d == 'O')) {
+            temp.push(i+2)
+        }
+
+        if (a === c && c === d && (a,c,d == 'O')) {
+            temp.push(i+1)
+        }
+
+        if (b === c && c === d && (b,c,d == 'O')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b == 'O')){
+            temp.push(i+2)
+        }
+
     }
     for (let i = 1; i <= (gameState.length)-12; i++){ //vertical checker
         let a = gameState[i];
         let b = gameState[i+4];
         let c = gameState[i+8];
-        if (a === '' || b === '' || c === '' ) {
-            continue;
-        }
+        let d = gameState[i+12];
         
-        if (a === b && b === c) {
+        if (a === b && b === c && (a,b,c != '')) {
             temp.push(i+12)
         }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+8)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+4)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b != 'O')){
+            temp.push(i+8)
+        }
+
+        if (b===c && (b,c != '') && (b,c != 'O')){
+            temp.push(i)
+        }
+        
+        if (a === b && b === c && (a,b,c == 'O')) {
+            temp.push(i+12)
+        }
+
+        if (a === b && b === d && (a,b,d == 'O')) {
+            temp.push(i+8)
+        }
+
+        if (a === c && c === d && (a,c,d == 'O')) {
+            temp.push(i+4)
+        }
+
+        if (b === c && c === d && (b,c,d == 'O')) {
+            temp.push(i)
+        }
+
+
     }
     for (let i = 1; i <= (gameState.length)-12; i += 4){ //diagonal checker right to left
         let a = gameState[i];
         let b = gameState[i+5];
         let c = gameState[i+10];
-        if (a === '' || b === '' || c === '' ) {
-            continue;
-        }
-        
-        if (a === b && b === c) {
+        let d = gameState[i+15];
+
+        if (a === b && b === c && (a,b,c != '')) {
             temp.push(i+15)
         }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+10)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+5)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b != 'O')){
+            temp.push(i+10)
+        }
+
+        if (b===c && (b,c != '') && (b,c != 'O')){
+            temp.push(i)
+        }
+     
+        if (a === b && b === c && (a,b,c == 'O')) {
+            temp.push(i+15)
+        }
+
+        if (a === b && b === d && (a,b,d == 'O')) {
+            temp.push(i+10)
+        }
+
+        if (a === c && c === d && (a,c,d == 'O')) {
+            temp.push(i+5)
+        }
+
+        if (b === c && c === d && (b,c,d == 'O')) {
+            temp.push(i)
+        }
+
     }
     for (let i = 4; i <= (gameState.length)-12; i += 4){ //diagonal checker left to right
         let a = gameState[i];
         let b = gameState[i+3];
         let c = gameState[i+6];
-        if (a === '' || b === '' || c === '' ) {
-            continue;
+        let d = gameState[i+9];
+
+        if (a === b && b === c && (a,b,c != '')) {
+            temp.push(i+9)
+        }
+
+        if (a === b && b === d && (a,b,d != '')) {
+            temp.push(i+6)
+        }
+
+        if (a === c && c === d && (a,c,d != '')) {
+            temp.push(i+3)
+        }
+
+        if (b === c && c === d && (b,c,d != '')) {
+            temp.push(i)
+        }
+
+        if (a===b && (a,b != '') && (a,b != 'O')){
+            temp.push(i+6)
+        }
+
+        if (b===c && (b,c != '') && (b,c != 'O')){
+            temp.push(i)
         }
         
-        if (a === b && b === c) {
+        if (a === b && b === c && (a,b,c == 'O')) {
             temp.push(i+9)
+        }
+
+        if (a === b && b === d && (a,b,d == 'O')) {
+            temp.push(i+6)
+        }
+
+        if (a === c && c === d && (a,c,d == 'O')) {
+            temp.push(i+3)
+        }
+
+        if (b === c && c === d && (b,c,d == 'O')) {
+            temp.push(i)
         }
     }
     if(temp.length >= 0){
@@ -125,20 +374,26 @@ function bot_Turn() {
     }else if (player1 < 6 && player1 >= 3) {
         //Medium
         difficult = "Medium"
-        hard_logic()
+        medium_logic()
+        console.log(q)
+        console.log(z)
         if(p < 5){
             bot_choice = Math.floor((Math.random() * (p+5)) + 1);
             console.log(bot_choice)
-        } else {
+        } else if (p <= 28 && p >= 5){
             bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
             console.log(bot_choice)
         }
+     
         if (q.length != 0 && saklar == true) {
             let choice = q
             let n = q.length
             let val = 0
             for (let i = 0 ; i < n ; i++){
-                val = choice[i]
+                if (!(z.includes(choice[i]))){
+                    val = choice[i];
+                    z = q;
+                }
             }
             bot_choice = val
             saklar = false
@@ -146,46 +401,50 @@ function bot_Turn() {
             console.log(bot_choice)
         }
 
-        while(bot_choice > 28 ){
-            bot_choice = Math.floor((Math.random() * (p+5)) + (p-5));
-            console.log(bot_choice)
-        }
-    }else if (player1 < 9 && player1 >= 6 ) {
+    }else if (player1 <= 100 && player1 >= 6 ) {
         difficult = "Hard"
         console.log(q)
         hard_logic()
         if(p < 3){
             bot_choice = Math.floor((Math.random() * (p+3)) + 1);
             console.log(bot_choice)
-        } else {
+        } else if (p <= 28 && p > 3) {
             bot_choice = Math.floor((Math.random() * (p+3)) + (p-3));
             console.log(bot_choice)
         }
+     
         if (q.length != 0 && saklar == true) {
             let choice = q
             let n = q.length
             let val = 0
             for (let i = 0 ; i < n ; i++){
-                val = choice[i]
+                if (!(z.includes(choice[i]))){
+                    val = choice[i];
+                    z = q;
+                }
             }
+         
             bot_choice = val
             saklar = false
             console.log(saklar)
             console.log(bot_choice)
         }
-
-        while(bot_choice > 28 || bot_choice <= 0) {
-            bot_choice = Math.floor((Math.random() * (p+3)) + (p-3));
-            console.log(bot_choice)
-        }
-
+        
     }
     
-
+    while(bot_choice > 28 && bot_choice != 0){
+        bot_choice = Math.floor((Math.random() * (gameState.length)-2) + 1);
+    }
+    while(bot_choice <= 0){
+        bot_choice = Math.floor((Math.random() * (gameState.length)-2) + 1);
+    }
+    
+    console.log(bot_choice)
+ 
     //Logika bot
-    if (gameState[bot_choice] != "X" && gameState[bot_choice] != "O"){
+    if (gameState[bot_choice] != "X" && gameState[bot_choice] != "O" ){
         gameState[bot_choice] = "O";
-        if (bot_choice != 0) {
+        if (bot_choice != 0 && bot_choice <= 28) {
             document.getElementById(`${bot_choice}`).innerHTML = "O";
         }
     } else { bot_Turn();}
@@ -208,13 +467,17 @@ function handleCellPlayed(clickedCell, clickedCellIndex) {
 function handlePlayerChange() {
         currentPlayer = currentPlayer === "X" ? "O" : "X";
         statusDisplay.innerHTML = currentPlayerTurn();
-        statusDisplay_score.innerHTML = score_Message();
+        console.log(currentPlayerTurn())
+        statusDisplay_score.innerHTML = player1 + " : " + player2;
         statusDisplay_difficult.innerHTML = difficult;
         if (currentPlayer === "O"){
             currentPlayer = "O"
             statusDisplay.innerHTML = currentPlayerTurn();
-            bot_Turn();
+            bot_Turn()
             handleResultValidation()
+        } if (player1 == 100) {
+            player1 = 0;
+            player2 = 0;
         }
 
 }
@@ -287,7 +550,7 @@ function handleResultValidation() {
 
     if (roundWon) {
         statusDisplay.innerHTML = winningMessage();
-        statusDisplay_score.innerHTML = score_Message();
+        statusDisplay_score.innerHTML = player1 + " : " + player2;;
         if (currentPlayer === "X" && roundWon === true){
             player1 += 1
         } else if (currentPlayer === "O" && roundWon === true) {
@@ -304,7 +567,7 @@ yang masih belum diisi dengan tanda pemain
     let roundDraw = !gameState.includes("");
     if (roundDraw) {
         statusDisplay.innerHTML = drawMessage();
-        statusDisplay_score.innerHTML = score_Message();
+        statusDisplay_score.innerHTML = player1 + " : " + player2;;
         gameActive = false;
         return;
     }
@@ -312,7 +575,7 @@ yang masih belum diisi dengan tanda pemain
 Jika kita sampai di sini kita tahu bahwa belum ada yang memenangkan permainan,
 dan masih ada gerakan yang harus dimainkan, jadi kami melanjutkan dengan mengubah pemain saat ini.
 */
-    handlePlayerChange();
+    setTimeout(handlePlayerChange,1000);
 }
 
 function handleCellClick(clickedCellEvent) {
@@ -345,9 +608,11 @@ function handleCellClick(clickedCellEvent) {
 function handleRestartGame() {
     gameActive = true;
     currentPlayer = "X";
-    gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];;
+    gameState = ["None", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""];;
+    q = []
+    z = []
     statusDisplay.innerHTML = currentPlayerTurn();
-    statusDisplay_score.innerHTML = score_Message();
+    statusDisplay_score.innerHTML = player1 + " : " + player2;;
     document.querySelectorAll('.cell')
                .forEach(cell => cell.innerHTML = "");
 }

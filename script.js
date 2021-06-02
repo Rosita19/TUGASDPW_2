@@ -1,6 +1,8 @@
 function play(){
     document.getElementById("hal2").style.display = "none";
     document.getElementById("game").style.display = "block";
+    document.getElementById("namep1").innerHTML = disp_player1;
+    document.getElementById("namep2").innerHTML = disp_player2;
 }
 
 /*
@@ -31,7 +33,7 @@ let gameState = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
 let player1 = 0
 let player2 = 0
 /*
-Kami membuat display player dari halaman2.html ke dalam main2.html
+Kami membuat display informasi player
 */
 const display_name = () => `${disp_player1}'s`;
 const display_name2 = () => `${disp_player2}'s`;

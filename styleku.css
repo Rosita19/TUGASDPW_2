@@ -18,14 +18,12 @@ h2{
 }
 h1 {
 	padding: 0px 70px;
-    text-align: center;
-    margin: 0px 300px;
-    font-family:'Times New Roman', Times, serif;
-    text-shadow: 2px 2px 5px navy;
-    font-size: 40px;
-    animation-name: example;
-    animation-duration:3s;
-    margin-top: 50px;
+    	text-align: center;
+    	margin: 0px 300px;
+    	font-family:'Times New Roman', Times, serif;
+    	text-shadow: 2px 2px 5px navy;
+    	font-size: 40px;
+    	margin-top: 50px;
 }
 p{
 	font-family: comic sans ms;
@@ -111,19 +109,6 @@ a:hover{
 	box-shadow: 1px 5px 5px 5px black;
 
 }
-.container-score3{
-	width: 400px;
-	height: 50px;
-	background-color: white;
-	margin-top: 50px;
-	margin-left: 25px;
-	border-radius: 20px;
-	color: black;
-	text-align: center;
-	box-shadow: 1px 5px 5px 5px black;
-
-}
-
 
 .header{
 	background-color: #000080;
@@ -232,18 +217,7 @@ a:hover{
 	width: 150px;
 	height: 150px;
 }
-@keyframes example {
-	from {
-		background-color: navy; 
-		left: 200px;
-		border-radius: 30px;
-		margin-top: 15px;
-		margin-bottom: 50px;
-	}
-    to {
-    	background-color: #F0F8FF;
-    	}
-}
+
 .tdku {
     width: 100px;
     height: 100px;
@@ -252,14 +226,6 @@ a:hover{
     margin: 5px auto;
     margin-top: 50px;
     
-}
-.vert {
-    border-left: 3px solid navy;
-    border-right: 3px solid navy;
-}
-.hori {
-    border-top: 3px solid navy;
-    border-bottom: 3px solid navy;
 }
 .kiri{
 	margin-left: 700px;

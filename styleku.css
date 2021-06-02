@@ -18,14 +18,12 @@ h2{
 }
 h1 {
 	padding: 0px 70px;
-    text-align: center;
-    margin: 0px 300px;
-    font-family:'Times New Roman', Times, serif;
-    text-shadow: 2px 2px 5px navy;
-    font-size: 40px;
-    animation-name: example;
-    animation-duration:3s;
-    margin-top: 50px;
+    	text-align: center;
+    	margin: 0px 300px;
+    	font-family:'Times New Roman', Times, serif;
+    	text-shadow: 2px 2px 5px navy;
+    	font-size: 40px;
+    	margin-top: 50px;
 }
 p{
 	font-family: comic sans ms;
@@ -232,18 +230,7 @@ a:hover{
 	width: 150px;
 	height: 150px;
 }
-@keyframes example {
-	from {
-		background-color: navy; 
-		left: 200px;
-		border-radius: 30px;
-		margin-top: 15px;
-		margin-bottom: 50px;
-	}
-    to {
-    	background-color: #F0F8FF;
-    	}
-}
+
 .tdku {
     width: 100px;
     height: 100px;
